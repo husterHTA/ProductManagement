@@ -14,12 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.ProductManagement.model.Product;
 import com.example.ProductManagement.service.ProductService;
 
+//tầng controller
 @Controller
 public class AppController {
 	
-	@Autowired
+	@Autowired		//Spring IOC tìm và tiêm Bean tương ứng trên thuộc tính chú thích
 	private ProductService service;
 	
+	//chức năng: hiển thị danh sách sản phẩm
 	@RequestMapping("/")
 	public String viewHomePage(Model model) {
 		List<Product> listProducts = service.listAll();
@@ -28,6 +30,7 @@ public class AppController {
 		return "index";
 	}
 	
+	//thêm mới sản phẩm
 	@RequestMapping("/new")
 	public String showNewProductPage(Model model) {
 	    Product product = new Product();
@@ -36,6 +39,7 @@ public class AppController {
 	    return "new_product";
 	}
 	
+	//lưu thông tin sản phẩm
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String saveProduct(@ModelAttribute("product") Product product) {
 	    service.save(product);
@@ -43,6 +47,7 @@ public class AppController {
 	    return "redirect:/";
 	}
 	
+	//chỉnh sửa thông tin sản phẩm
 	@RequestMapping("/edit/{id}")
 	public ModelAndView showEditProductPage(@PathVariable(name = "id") int id) {
 	    ModelAndView mav = new ModelAndView("edit_product");
@@ -52,6 +57,7 @@ public class AppController {
 	    return mav;
 	}
 	
+	//xóa sản phẩm
 	@RequestMapping("/delete/{id}")
 	public String deleteProduct(@PathVariable(name = "id") int id) {
 	    service.delete(id);

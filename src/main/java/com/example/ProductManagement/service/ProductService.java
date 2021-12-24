@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.ProductManagement.model.Product;
 import com.example.ProductManagement.repository.ProductRepository;
 
-@Service
-@Transactional
+@Service		//đánh dấu tầng service
+@Transactional		//đánh dấu class là transaction
 public class ProductService {
 	
 	@Autowired
